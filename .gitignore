@@ -37,3 +37,9 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/misc.xml
+/.idea/encodings.xml
+/src/main/webapp/index.jsp
+/.idea/jpa-buddy.xml
+/.idea/vcs.xml
+/src/main/webapp/WEB-INF/web.xml
+/.idea/workspace.xml
