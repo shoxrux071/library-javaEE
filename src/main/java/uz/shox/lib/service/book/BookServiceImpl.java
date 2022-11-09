@@ -12,7 +12,6 @@ import uz.shox.lib.exception.AuthenticationException;
 import uz.shox.lib.exception.InvalidInputException;
 import uz.shox.lib.exception.NotFoundException;
 import uz.shox.lib.service.user.UserService;
-import uz.shox.lib.service.user.UserServiceImpl;
 
 import java.awt.print.PageFormat;
 import java.awt.print.Pageable;
@@ -30,7 +29,7 @@ public class BookServiceImpl extends AbstractDAO <BookDAO> implements UserServic
 
 
 
-    public BookServiceImpl(BookDAO dao) {
+    public BookServiceImpl() {
         super(ApplicationContexHolder.getBean(BookDAO.class));
     }
 
@@ -43,7 +42,7 @@ public class BookServiceImpl extends AbstractDAO <BookDAO> implements UserServic
 
     @Override
     public UserDTO create(UserCreateDTO dto) throws InvalidInputException {
-        return null;
+          return null;
     }
 
     @Override
