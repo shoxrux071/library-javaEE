@@ -22,61 +22,7 @@ import java.awt.print.Printable;
  * @since 09/11/22 04:04 (Wednesday)
  * library-javaEE/IntelliJ IDEA
  */
-public class BookServiceImpl extends AbstractDAO <BookDAO> implements UserService, Pageable {
-
-    private static BookServiceImpl instance;
+public class BookServiceImpl extends AbstractDAO <BookDAO> implements BookService, Pageable {
 
 
-
-
-    public BookServiceImpl() {
-        super(ApplicationContexHolder.getBean(BookDAO.class));
-    }
-
-    public static BookServiceImpl getInstance() {
-        if (instance==null){
-            instance = new BookServiceImpl();
-        }
-        return instance;
-    }
-
-    @Override
-    public UserDTO create(UserCreateDTO dto) throws InvalidInputException {
-          return null;
-    }
-
-    @Override
-    public User get(long id) {
-        return null;
-    }
-
-    @Override
-    public void update(UserUpdateDTO dto) {
-
-    }
-
-    @Override
-    public UserDTO login(UserLoginDTO dto) throws InvalidInputException, AuthenticationException {
-        return null;
-    }
-
-    @Override
-    public UserDTO getByEmail(String email) throws NotFoundException {
-        return null;
-    }
-
-    @Override
-    public int getNumberOfPages() {
-        return 0;
-    }
-
-    @Override
-    public PageFormat getPageFormat(int pageIndex) throws IndexOutOfBoundsException {
-        return null;
-    }
-
-    @Override
-    public Printable getPrintable(int pageIndex) throws IndexOutOfBoundsException {
-        return null;
-    }
 }

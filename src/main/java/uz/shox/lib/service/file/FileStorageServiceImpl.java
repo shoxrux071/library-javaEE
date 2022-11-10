@@ -2,6 +2,11 @@ package uz.shox.lib.service.file;
 
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
+import org.apache.pdfbox.debugger.ui.ImageUtil;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import uz.shox.lib.config.ApplicationContexHolder;
 import uz.shox.lib.dao.AbstractDAO;
 import uz.shox.lib.dao.BookDAO;
@@ -12,6 +17,7 @@ import uz.shox.lib.exception.NotFoundException;
 import uz.shox.lib.service.book.BookServiceImpl;
 
 import javax.servlet.http.Part;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -83,7 +89,7 @@ public class FileStorageServiceImpl extends AbstractDAO<UploadDAO> implements Fi
 
     @Override
     public File download(@NonNull String filename) {
-        return null;
+    return null;
     }
 
     @Override
@@ -116,6 +122,35 @@ public class FileStorageServiceImpl extends AbstractDAO<UploadDAO> implements Fi
 
     @Override
     public Uploads extractCover(Part book) {
-        return null;
+         try {
+             String contentTYpe = "image/png";
+             String[] split = book.getSubmittedFileName().split("\\.");
+             String originalFileName = split[0] + "\\.png";
+             originalFileName = originalFileName.replaceAll(",","_");
+
+             long size = book.getSize();
+             String generatedName = System.currentTimeMillis() + ".png";
+             String path = "uploads" + generatedName;
+
+             Uploads uploads = Uploads.builder()
+                     .contentType(contentTYpe)
+                     .originalName(originalFileName)
+                     .path(path)
+                     .size(size)
+                     .generatedName(generatedName)
+                     .build();
+
+             String uploadPath = rootPath.resolve(generatedName).toString();
+             dao.save(uploads);
+
+             PDDocument document = PDDocument.load(book.getInputStream());
+             PDFRenderer pdfRenderer = new PDFRenderer(document);
+             BufferedImage bufferedImage = pdfRenderer.renderImageWithDPI(0, 300, ImageType.RGB);
+             ImageIOUtil.writeImage(bufferedImage,uploadPath,300);
+             return uploads;
+         }
+         catch (IOException e){
+             throw new RuntimeException("something wrong try again");
+         }
     }
 }
