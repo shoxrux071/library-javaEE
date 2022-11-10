@@ -43,3 +43,4 @@ build/
 /.idea/vcs.xml
 /src/main/webapp/WEB-INF/web.xml
 /.idea/workspace.xml
+/.idea/jsLibraryMappings.xml
