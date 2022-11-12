@@ -27,7 +27,7 @@ public class AuthRegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("views/auth/register");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("views/auth/register.jsp");
         dispatcher.forward(req,resp);
     }
 

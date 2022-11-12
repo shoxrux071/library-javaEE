@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserInfo {
+public class PageInfo {
 
     private Integer number;
     private Integer totalPages;

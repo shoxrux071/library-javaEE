@@ -11,5 +11,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum BookStatus {
-    PENDING,ACTIVE,DETETED
+    PENDING,ACTIVE,DELETED
 }

@@ -34,6 +34,7 @@ public class Book {
     @Enumerated(EnumType.STRING)
 
     private Language language;
+    private Integer pageCount;
     @Builder.Default
     private Integer downloadCount=0;
     @OneToOne(fetch = FetchType.EAGER)

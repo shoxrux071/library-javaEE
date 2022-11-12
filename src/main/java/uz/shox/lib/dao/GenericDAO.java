@@ -49,7 +49,7 @@ public class GenericDAO <T,ID> implements BaseDAO{
         session.close();
     }
 
-    private T findById(ID id ) {
+    public T findById(ID id) {
         Session session = getSession();
         session.beginTransaction();
         T t = session.get(persistentClass, id);
