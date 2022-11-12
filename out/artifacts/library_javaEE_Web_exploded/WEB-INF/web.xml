@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+  <welcome-file-list>
+    <welcome-file>views/main.jsp</welcome-file>
+  </welcome-file-list>
+
+  <error-page>
+    <exception-type>uz.shox.lib.exception.NotFoundException</exception-type>
+    <location>/404</location>
+  </error-page>
+
+  <error-page>
+    <exception-type>uz.shox.lib.exception.AuthenticationException</exception-type>
+    <location>/401</location>
+  </error-page>
+  <error-page>
+    <exception-type>uz.shox.lib.exception.InvalidInputException</exception-type>
+    <location>/400</location>
+  </error-page>
+
+  <filter>
+    <filter-name>auth-reg-filter</filter-name>
+    <filter-class>uz.shox.lib.filters.auth.AuthRegisterFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>auth-reg-filter</filter-name>
+    <url-pattern>/register</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>auth-login-filter</filter-name>
+    <filter-class>uz.shox.lib.filters.auth.AuthLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>auth-login-filter</filter-name>
+    <url-pattern>/login</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>book-approval-filter</filter-name>
+    <filter-class>uz.shox.lib.filters.book.BookApprovalFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>book-approval-filter</filter-name>
+    <url-pattern>/admin</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>Global-Filter</filter-name>
+    <filter-class>uz.shox.lib.filters.GlobalFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Global-Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--    <filter>-->
+  <!--        <filter-name>book-upload-filter</filter-name>-->
+  <!--        <filter-class>com.company.library.filters.book.BookUploadFilter</filter-class>-->
+  <!--    </filter>-->
+  <!--    <filter-mapping>-->
+  <!--        <filter-name>book-upload-filter</filter-name>-->
+  <!--        <url-pattern>/uploads/*</url-pattern>-->
+  <!--    </filter-mapping>-->
+</web-app>
