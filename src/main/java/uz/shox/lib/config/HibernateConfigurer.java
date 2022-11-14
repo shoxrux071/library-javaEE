@@ -22,47 +22,52 @@ import java.util.Properties;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HibernateConfigurer {
-   private static SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-   private static SessionFactory setUp(){
-       StandardServiceRegistry registry = null;
 
-       if (registry == null){
-           StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
+    private static SessionFactory setUp() {
+        StandardServiceRegistry registry = null;
 
-           Properties properties = new Properties();
-           try {
-               properties.load(new FileReader("/home/shoxrux/IdeaProjects/library-javaEE/src/main/resources/application.properties"));
+        if (sessionFactory == null) {
+            StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
+            Properties properties = new Properties();
 
-               registryBuilder.applySettings(properties);
-               registry = registryBuilder.build();
+            try {
+                properties.load(new FileReader("/home/shoxrux/IdeaProjects/library-javaEE/src/main/resources/datasource.properties"));
 
-               MetadataSources metadataSources = new MetadataSources(registry);
+                registryBuilder.applySettings(properties);
+                registry = registryBuilder.build();
 
-               Reflections reflections = new Reflections("uz.shoxrux.lib.domains");
-               reflections.getTypesAnnotatedWith(Entity.class).forEach( aClass -> metadataSources.addAnnotatedClassName(aClass.getName()));
+                MetadataSources metadataSources = new MetadataSources(registry);
 
-               Metadata build = metadataSources.getMetadataBuilder().build();
-               return build.getSessionFactoryBuilder().build();
+                Reflections reflections = new Reflections("uz.shox.lib.domains");
 
-           } catch (Exception e) {
-               if (Objects.nonNull(registry)){
+                reflections.getTypesAnnotatedWith(Entity.class).forEach(clazz -> metadataSources.addAnnotatedClassName(clazz.getName()));
 
-                   StandardServiceRegistryBuilder.destroy(registry);
-               }
+                Metadata metadata = metadataSources.getMetadataBuilder().build();
 
-               throw new RuntimeException("Hibernate exception %s".formatted(e.getMessage()));
-           }
+                return metadata.getSessionFactoryBuilder().build();
 
-       }
-       return sessionFactory;
-   }
+            } catch (IOException e) {
+                if (Objects.nonNull(registry)) {
+                    StandardServiceRegistryBuilder.destroy(registry);
+                }
 
-   public static SessionFactory getSessionFactory(){
-       if (sessionFactory == null|| sessionFactory.isClosed()){
-           sessionFactory = setUp();
-       }
-       return sessionFactory;
-   }
+                throw new RuntimeException("Hibernate exception %s".formatted(e.getMessage()));
+            }
+
+
+        }
+
+        return sessionFactory;
+    }
+
+
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null || sessionFactory.isClosed()) {
+            sessionFactory = setUp();
+        }
+        return sessionFactory;
+    }
 
 }

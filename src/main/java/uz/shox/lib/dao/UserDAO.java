@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import uz.shox.lib.domains.User;
+import uz.shox.lib.domains.Users;
 
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
  * library-javaEE/IntelliJ IDEA
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserDAO extends GenericDAO<User,Long> {
+public class UserDAO extends GenericDAO<Users,Long> {
 
     private static UserDAO instance = null;
 
@@ -25,11 +25,11 @@ public class UserDAO extends GenericDAO<User,Long> {
         return instance;
     }
 
-    public Optional <User> findByEmail(String email){
+    public Optional <Users> findByEmail(String email){
         Session session = getSession();
         session.beginTransaction();
-        Query<User> query = session.createQuery("select t from User t where t.email=:email", User.class);
-        User user = query.setParameter("email", email).getSingleResultOrNull();
+        Query<Users> query = session.createQuery("select t from Users t where t.email=:email", Users.class);
+        Users user = query.setParameter("email", email).getSingleResultOrNull();
         session.getTransaction().commit();
         return Optional.ofNullable(user);
     }
