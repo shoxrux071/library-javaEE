@@ -38,11 +38,11 @@ public class FileStorageServlet extends HttpServlet {
         String path = req.getParameter("path");
         UploadsDTO uploadsDTO = fileStorageService.getByPath(path);
         CompletableFuture.runAsync(() -> {
-            if (uploadsDTO.getContentType().equals("application/pdf")){
-               bookService.updateDownloadCount(uploadsDTO.getId());
+            if (uploadsDTO.getContentType().equals("application/pdf")) {
+                bookService.updateDownloadCount(uploadsDTO.getId());
             }
             resp.setHeader("Content-disposition", "attachment; filename=" + uploadsDTO.getOriginalName());
-            Path path1 = Paths.get("/home/shoxrux/upload", uploadsDTO.getPath());
+            Path path1 = Paths.get("/home/shoxrux/IdeaProjects/library-javaEE/upload", uploadsDTO.getPath());
             ServletOutputStream outputStream = null;
             try {
 

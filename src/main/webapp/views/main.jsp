@@ -15,7 +15,6 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,8 +40,7 @@
                    placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <button class="btn btn-outline-danger ml-2 my-2 my-sm-0" type="button" onclick="location='/logout'">Logout
-        </button>
+        <button class="btn btn-outline-danger ml-2 my-2 my-sm-0" type="button" onclick="location='/logout'">Logout</button>
     </div>
 </nav>
 
@@ -50,38 +48,36 @@
     ➕ Add
 </button>
 <c:if test="${user.status.priority>50}">
-    <button type="button" class="btn btn-success mt-4 mb-4 text-white" onclick="window.location.href='/admin'">
-        Pending Books
-    </button>
+<button type="button" class="btn btn-success mt-4 mb-4 text-white" onclick="window.location.href='/admin'">
+    Pending Books
+</button>
 </c:if>
 
 <c:if test="${pageInfo.totalPages>0}">
-    <nav aria-label="Pagination">
-        <ul class="pagination">
-            <c:if test="${pageInfo.hasPrevious}">
-                <li class="page-item">
-                    <a class="page-link" href="?search=${search}&page=${pageInfo.number-1}" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?search=${search}&page=${pageInfo.number-1}"
-                       tabindex="-1">${pageInfo.number-1}</a>
-                </li>
-            </c:if>
+<nav aria-label="Pagination">
+    <ul class="pagination">
+        <c:if test="${pageInfo.hasPrevious}">
+        <li class="page-item">
+            <a class="page-link" href="?search=${search}&page=${pageInfo.number-1}" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?search=${search}&page=${pageInfo.number-1}"
+               tabindex="-1">${pageInfo.number-1}</a>
+        </li>
+        </c:if>
 
-            <li class="page-item active"><a class="page-link" href="?search=${search}&page=1">${pageInfo.number}</a>
-            </li>
-
-            <c:if test="${pageInfo.hasNext}">
-                <li class="page-item">
-                    <a class="page-link" href="?search=${search}&page=${pageInfo.number+1}"
-                       tabindex="-1">${pageInfo.number+1}</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?search=${search}&page=${pageInfo.number+1}" tabindex="-1">Next</a>
-                </li>
-            </c:if>
-        </ul>
-    </nav>
+        <li class="page-item active"><a class="page-link" href="?search=${search}&page=1">${pageInfo.number}</a>
+        </li><c:if test="${pageInfo.hasNext}">
+        <li class="page-item">
+            <a class="page-link" href="?search=${search}&page=${pageInfo.number+1}"
+               tabindex="-1">${pageInfo.number+1}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?search=${search}&page=${pageInfo.number+1}" tabindex="-1">Next</a>
+        </li>
+    </c:if>
+    </ul>
+</nav>
 </c:if>
 <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel"
@@ -146,36 +142,31 @@
                         </div>
                     </div>
                 </form>
-            </div>
-
-        </div>
+            </div></div>
     </div>
 </div>
 <div class="row m-2">
     <c:forEach items="${books}" var="book">
-        <div class="col-2">
-            <div class="card p-2" style="   width: 100%;">
-                <img class="card-img-top" id="example"
-                     src="/download?img=${book.cover.path}" width="140"
-                     height="250"
-                     alt="Card image cap">
-                <div class="card-body p-1">
-                    <h5 class="card-title"> ${book.name}</h5>
-                    <i style="display:block;"><b>author</b> : ${book.author} </i>
-                    <i style="display:block;"><b>genre</b> : ${book.genre.getKey()}</i>
-                    <i style="display:block;"><b>language</b> : ${book.language}</i>
-                    <i style="display:block;"><b>pageCount</b> : ${book.pageCount}</i>
-                    <i style="display:block;"><b>downloadCount</b> : ${book.downloadCount}</i>
-                    <button type="button" class="btn btn-warning"
-                            onclick="location='/uploads/get?path=${book.cover.path}'">Get Cover
-                    </button>
-                    <button type="button" class="btn btn-success "
-                            onclick="location='/uploads/get?path=${book.file.path}'">Get Book
-                    </button>
-                </div>
-            </div>
+    <div class="col-2">
+        <img class="card p-2" style="   width: 100%;">
+        <img class="card-img-top" id="example" src="/download?img=${book.cover.path}" width="140" height="250" alt="Card image cap">
+        <div class="card-body p-1">
+            <h5 class="card-title"> ${book.name}</h5>
+            <i style="display:block;"><b>author</b> : ${book.author} </i>
+            <i style="display:block;"><b>genre</b> : ${book.genre.getKey()}</i>
+            <i style="display:block;"><b>language</b> : ${book.language}</i>
+            <i style="display:block;"><b>pageCount</b> : ${book.pageCount}</i>
+            <i style="display:block;"><b>downloadCount</b> : ${book.downloadCount}</i>
+            <button type="button" class="btn btn-warning"
+                    onclick="location='/uploads/get?path=${book.cover.path}'">Get Cover
+            </button>
+            <button type="button" class="btn btn-success "
+                    onclick="location='/uploads/get?path=${book.file.path}'">Get Book
+            </button>
         </div>
-    </c:forEach>
+    </div>
+</div>
+</c:forEach>
 </div>
 
 

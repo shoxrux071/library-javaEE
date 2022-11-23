@@ -21,7 +21,7 @@ public class DownloadImageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String requestedImage = req.getParameter("img");
-        Path path = Paths.get("/home/shoxrux/upload", requestedImage);
+        Path path = Paths.get("/home/shoxrux/IdeaProjects/library-javaEE/upload", requestedImage);
         ServletOutputStream outputStream = resp.getOutputStream();
         Files.copy(path,outputStream);
     }

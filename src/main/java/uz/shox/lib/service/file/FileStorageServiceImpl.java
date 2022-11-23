@@ -35,7 +35,7 @@ import java.util.Optional;
 public class FileStorageServiceImpl extends AbstractDAO<UploadDAO> implements FileStorageService{
         private static FileStorageServiceImpl instance;
 
-        Path rootPath = Paths.get("/home/shoxrux/uploads");
+        Path rootPath = Paths.get("/home/shoxrux/IdeaProjects/library-javaEE/upload");
 
     public FileStorageServiceImpl() {
         super(ApplicationContexHolder.getBean(UploadDAO.class));
@@ -75,8 +75,10 @@ public class FileStorageServiceImpl extends AbstractDAO<UploadDAO> implements Fi
                     .generatedName(generatedName)
                     .path(path)
                     .build();
-            Path uploadsPth = rootPath.resolve(generatedName);
             dao.save(uploads);
+
+            Path uploadsPth = rootPath.resolve(generatedName);
+
 
             Files.copy(part.getInputStream(),uploadsPth, StandardCopyOption.REPLACE_EXISTING);
             return uploads;
@@ -130,7 +132,7 @@ public class FileStorageServiceImpl extends AbstractDAO<UploadDAO> implements Fi
 
              long size = book.getSize();
              String generatedName = System.currentTimeMillis() + ".png";
-             String path = "uploads" + generatedName;
+             String path = "/upload/" + generatedName;
 
              Uploads uploads = Uploads.builder()
                      .contentType(contentTYpe)
@@ -139,9 +141,11 @@ public class FileStorageServiceImpl extends AbstractDAO<UploadDAO> implements Fi
                      .size(size)
                      .generatedName(generatedName)
                      .build();
+             dao.save(uploads);
+
+
 
              String uploadPath = rootPath.resolve(generatedName).toString();
-             dao.save(uploads);
 
              PDDocument document = PDDocument.load(book.getInputStream());
              PDFRenderer pdfRenderer = new PDFRenderer(document);
