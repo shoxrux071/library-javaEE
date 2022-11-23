@@ -42,7 +42,7 @@ public class FileStorageServlet extends HttpServlet {
                bookService.updateDownloadCount(uploadsDTO.getId());
             }
             resp.setHeader("Content-disposition", "attachment; filename=" + uploadsDTO.getOriginalName());
-            Path path1 = Paths.get("/home/dilshodbek/Uploads", uploadsDTO.getPath());
+            Path path1 = Paths.get("/home/shoxrux/upload", uploadsDTO.getPath());
             ServletOutputStream outputStream = null;
             try {
 
